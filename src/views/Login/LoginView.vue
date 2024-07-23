@@ -1,7 +1,7 @@
 <template>
   <div class="login_background-image">
     <van-nav-bar title="登  录" class="login-nav-bar" />
-    <img class="login_img" src="../../assets/log2.png" />
+    <img class="login_img" src="@/assets/log2.png" />
     <van-form @submit="onSubmit">
       <div class=" login_content">
         <van-field v-model="user.userName" left-icon="user" name="userName" label="用户名" placeholder="请输入用户名"
@@ -22,7 +22,7 @@
 import { reactive } from "vue";
 // import { FieldRule, FieldValidateTrigger, FieldRuleValidator } from 'vant'
 //引入login从API
-import { login } from "../../api/user";
+import { login } from "@/api/user";
 import { showLoadingToast, showSuccessToast, showNotify, showToast, FieldRule } from 'vant';
 
 

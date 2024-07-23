@@ -1,11 +1,6 @@
-<script setup lang="ts"> 
-  import { ref } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
 
-  const username = ref('');
-  const password = ref('');
-  const onSubmit = (values:string) => {
-      console.log('submit', values);
-    };
 
 
 </script>
@@ -23,16 +18,18 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
-.divbox{
+
+.divbox {
   width: 750px;
   height: 300px;
   background-color: blue;
 }
-
 </style>

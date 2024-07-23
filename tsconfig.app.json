@@ -6,7 +6,11 @@
     "useDefineForClassFields": true,
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "skipLibCheck": true,
+    "skipLibCheck": true, 
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },    
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -22,6 +26,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
-  },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "postcss.config.cjs"]
+  }, 
+  "include": ["vite.config.ts","src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "postcss.config.js","src/**/*.css"]
+
 }
