@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { defineAsyncComponent } from 'vue';
 
+//@ts-ignore  这个语句没用，只是开发时用来测试备注的
+const LoginView = defineAsyncComponent(() => import('@/views/Login/LoginView.vue'));
 
 
 </script>
 
 <template>
   <div>
+    <!-- <LoginView></LoginView> -->
     <router-view></router-view>
   </div>
 </template>

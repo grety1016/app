@@ -34,7 +34,7 @@ interface IUser {
   userPwd: string;
 }
 //实例化user类型实例
-const user: IUser = reactive<IUser>({ userName: "", userPwd: "" } as IUser);
+const user: IUser = reactive<IUser>({} as IUser);
 //登录表单提交事件函数
 const onSubmit = async () => {
 
@@ -75,7 +75,7 @@ const onRegedit = async () => {
 const userFormRules = {
   userName: [
     { required: true, message: '请输入用户名', trigger: 'onBlur' },
-    { pattern: /^[a-zA-Z0-9_-]{4,16}$/, message: '用户名格式不正确', trigger: 'onBlur' }
+    { pattern: /^[\u4e00-\u9fa5]{2,6}$/, message: '用户名格式不正确', trigger: 'onBlur' }
   ] as FieldRule[],
   userPwd: [
     { required: true, message: '请输入密码', trigger: 'onBlur' },
