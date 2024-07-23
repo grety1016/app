@@ -23,16 +23,15 @@ import { reactive } from "vue";
 // import { FieldRule, FieldValidateTrigger, FieldRuleValidator } from 'vant'
 //引入login从API
 import { login } from "@/api/user";
+import type { IUser } from "@/stores";
+import { userLoginStore } from "@/stores";
+
 import { showLoadingToast, showSuccessToast, showNotify, showToast, FieldRule } from 'vant';
 
 
 
 
-//定义user类型接口
-interface IUser {
-  userName: string;
-  userPwd: string;
-}
+
 //实例化user类型实例
 const user: IUser = reactive<IUser>({} as IUser);
 //登录表单提交事件函数
