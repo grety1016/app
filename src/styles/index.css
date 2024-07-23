@@ -6,7 +6,7 @@
   font-style: normal;
 }
 .login_background-image{
-  background-image: url("../../public/login/background2.jpg");
+  background-image: url("../assets/background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
@@ -19,12 +19,15 @@
   
   .login_button {
     height: 60px; /* 按钮高度低一点 */
-    margin: 0 100px; /* 两个按钮中间有间隔 */
+    margin: 0 125px; /* 两个按钮中间有间隔 */
     margin-top: 30px;
   }
 
-  .login_content{  
-    padding-top: 260px;
+  .login_img {
+   width: 339px; /* 图片宽度 */
+   height: 94px;
+   margin-left:25%;
   }
+ 
  
  
