@@ -16,24 +16,27 @@
         册</van-button>
     </van-form>
   </div>
+
 </template>
 
 <script setup lang="ts">
+
 import { reactive } from "vue";
 // import { FieldRule, FieldValidateTrigger, FieldRuleValidator } from 'vant'
 //引入login从API
 import { login } from "@/api/user";
-import type { IUser } from "@/stores";
 import { userLoginStore } from "@/stores";
-
+import { User } from "@/types/types";
 import { showLoadingToast, showSuccessToast, showNotify, showToast, FieldRule } from 'vant';
 
+//获取pinia的Store
+const LoginStore = userLoginStore();
 
 
 
 
 //实例化user类型实例
-const user: IUser = reactive<IUser>({} as IUser);
+const user: User = reactive<User>(LoginStore.loginUser as User);
 //登录表单提交事件函数
 const onSubmit = async () => {
 
@@ -50,7 +53,7 @@ const onSubmit = async () => {
   //判断返回响应代码是否为0，,0为成功，其它为失败
   if (res.data.code === 0) {
     showSuccessToast('登录成功');
-
+    LoginStore.loginUser.reset();
   } else {
     showToast({
       message: '用户名或密码错误',
@@ -62,7 +65,7 @@ const onSubmit = async () => {
 };
 
 //点击注册按钮事件函数
-const onRegedit = async () => {
+const onRegedit = () => {
   showNotify({
     type: 'warning',
     message: '未开放注册，请联系管理员开通账号',

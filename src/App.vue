@@ -9,7 +9,6 @@ const LoginView = defineAsyncComponent(() => import('@/views/Login/LoginView.vue
 
 <template>
   <div>
-    <!-- <LoginView></LoginView> -->
     <router-view></router-view>
   </div>
 </template>
