@@ -12,6 +12,13 @@ export default defineConfig({
   },
   server:{
     port:80,
-    host:'192.168.0.31'
+    host:'192.168.0.31',
+    proxy:{
+      // '/api':{
+      //   target:'http://192.168.0.25:8080',
+      //   changeOrigin:true,
+      //   rewrite:path => path.replace(/^\/api/,''),
+      //}
+    },
   }
 })

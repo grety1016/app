@@ -1,6 +1,8 @@
 //封装用户讲求的模块
-import {request} from '@/utils/request';
-export const login = (data) =>{
+import {request,source,CancelToken} from '@/utils/request';
+import { User } from '../types/types';
+import { AxiosResponse } from 'axios';
+export const login = (data:User):Promise<AxiosResponse<User>>  =>{
     return request({
         url: '/user/login',
         method: 'post',

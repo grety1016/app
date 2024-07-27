@@ -16,7 +16,7 @@ import {router} from '@/router'
 import {pinia} from '@/stores'
 
 // 引入样式
-import '@/styles/index.css'
+import './styles/index.css'
  
 
 

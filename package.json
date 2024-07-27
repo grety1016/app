@@ -13,6 +13,7 @@
     "axios": "^1.7.2",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
+    "sha256": "^0.2.0",
     "vant": "^4.9.2",
     "vue": "^3.4.31",
     "vue-axios": "^3.5.2",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.14.11",
+    "@types/sha256": "^0.2.2",
     "@vitejs/plugin-vue": "^5.0.5",
     "postcss": "^8.4.39",
     "postcss-pxtorem": "^6.1.0",

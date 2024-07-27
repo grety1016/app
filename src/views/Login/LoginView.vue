@@ -8,12 +8,14 @@
           :rules="userFormRules.userName" />
         <van-field v-model="user.userPwd" left-icon="lock" type="password" name="userPwd" label="密 码"
           placeholder="请输入密码" :rules="userFormRules.userPwd" />
+
+
       </div>
 
-      <van-button plain hairline type="primary" native-type="submit" class="login_button">登
-        录</van-button>
-      <van-button plain hairline type="primary" class="login_button" @click="onRegedit">注
-        册</van-button>
+      <van-button plain hairline type="primary" native-type="submit" class="login_button">
+        登 录</van-button>
+      <van-button plain hairline type="primary" class="login_button" @click="onRegedit">
+        注 册</van-button>
     </van-form>
   </div>
 
@@ -25,22 +27,27 @@ import { reactive } from "vue";
 // import { FieldRule, FieldValidateTrigger, FieldRuleValidator } from 'vant'
 //引入login从API
 import { login } from "@/api/user";
-import { userLoginStore } from "@/stores";
+import { useLoginStore } from "@/stores";
 import { User } from "@/types/types";
 import { showLoadingToast, showSuccessToast, showNotify, showToast, FieldRule } from 'vant';
 
+
+
 //获取pinia的Store
-const LoginStore = userLoginStore();
-
-
-
+const LoginStore = useLoginStore();
 
 //实例化user类型实例
-const user: User = reactive<User>(LoginStore.loginUser as User);
+let user: User = reactive(new User());
+//let user: User = reactive(LoginStore.loginUser);
+
+
+//如下代码用于验证码框失去焦点自动处理非数字的字符
+// const onBlur = () => {
+//   user.userPwd = user.userPwd.replace(/\D/g, '').trim();
+// };
+
 //登录表单提交事件函数
 const onSubmit = async () => {
-
-
   //如果网络慢会在登录时出现登录中的提示图标
   showLoadingToast({
     message: '登录中...',
@@ -53,13 +60,16 @@ const onSubmit = async () => {
   //判断返回响应代码是否为0，,0为成功，其它为失败
   if (res.data.code === 0) {
     showSuccessToast('登录成功');
-    LoginStore.loginUser.reset();
+    //将登录成功后的用户信息保存到pinia中
+    await LoginStore.setUserData(res.data);
+    //将登录界面中的输入框清空
+    //user = Object.assign(user, new User());
   } else {
+    await LoginStore.setUserData(res.data);
     showToast({
       message: '用户名或密码错误',
       icon: 'warn-o',
-    });
-    // showFailToast('用户名或密码错误');
+    }); 
   }
 
 };
@@ -78,6 +88,7 @@ const userFormRules = {
   userName: [
     { required: true, message: '请输入用户名', trigger: 'onBlur' },
     { pattern: /^[\u4e00-\u9fa5]{2,6}$/, message: '用户名格式不正确', trigger: 'onBlur' }
+    //如果要绑定钉钉用户手机登录，验证有效的中国大陆手机：/^1[3456789]\d{9}$/
   ] as FieldRule[],
   userPwd: [
     { required: true, message: '请输入密码', trigger: 'onBlur' },
