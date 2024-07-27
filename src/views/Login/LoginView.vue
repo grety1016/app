@@ -55,16 +55,16 @@ const onSubmit = async () => {
     loadingType: 'spinner',
   });
   //调用API接口登录方法
-    login(user).then((res) => {
+  login(user).then((res) => {
     //判断返回响应代码是否为0，,0为成功，其它为失败
     if (res.data.code === 0) {
       showSuccessToast('登录成功');
       //将登录成功后的用户信息保存到pinia中
       LoginStore.setUserData(res.data);
       //将登录界面中的输入框清空
-      user = Object.assign(user, new User());
+      //user = Object.assign(user, new User());
     } else {
-      LoginStore.setUserData(res.data);
+      //LoginStore.setUserData(res.data);
       showToast({
         message: '用户名或密码错误',
         icon: 'warn-o',
@@ -72,7 +72,7 @@ const onSubmit = async () => {
     }
   }).catch((error) => {
     console.log(error);
-  }); 
+  });
 
 
 

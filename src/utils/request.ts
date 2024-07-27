@@ -23,7 +23,7 @@ export const source = CancelToken.source();
 request.interceptors.request
 .use((config)=>{ //token处理拦截器逻辑
         if(LoginStore.loginUser.token && LoginStore.loginUser.token.length > 8){ 
-            config.headers['Authorization'] = `Bearer2 ${LoginStore.loginUser.token}` ; 
+            config.headers['Authorization'] = `${LoginStore.loginUser.token}` ; 
             return config; 
         }else{            
               if (router.currentRoute.value.path !== '/login'){
