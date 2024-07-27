@@ -20,22 +20,20 @@ export const source = CancelToken.source();
 
 
 //请求拦截器
-request.interceptors.request.use((config)=>{ 
-        if(LoginStore.loginUser.token){
-            console.log(LoginStore.loginUser.token.length);
-            console.log(router.currentRoute.value.path);
+request.interceptors.request
+.use((config)=>{ //token处理拦截器逻辑
+        if(LoginStore.loginUser.token && LoginStore.loginUser.token.length > 8){ 
             config.headers['Authorization'] = `Bearer2 ${LoginStore.loginUser.token}` ; 
             return config; 
-        }else{
-            source.cancel("用户尚未验证,需要重新登录！");
-            if (!LoginStore.loginUser.userPwd){
+        }else{            
+              if (router.currentRoute.value.path !== '/login'){
                 showToast({
                     message: '您尚未登录或登录记录已过期，请重新登录！',
                     icon: 'warn-o',
-                  });
-            } 
-                       
-            router.push('/login');            
+                });
+                source.cancel("用户尚未验证,需要重新登录！"); 
+                router.push('/login');
+            };         
         }    
         return config;
 },(error) =>{

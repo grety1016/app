@@ -12,7 +12,7 @@ pinia.use(piniaPluginPersistedstate);
 
 export const useLoginStore = defineStore('useLoginStore',() =>{
     //定义一个userLoginStore重置方法
-    const reset = async () => { 
+    const reset = () => { 
         //重置loginUser
         loginUser.reset(); 
     };
@@ -21,7 +21,7 @@ export const useLoginStore = defineStore('useLoginStore',() =>{
     let  loginUser: User = reactive(new User());
 
     //定义userLoginStore函数
-    const setUserData = async (data: User) =>{         
+    const setUserData = (data: User) =>{         
        loginUser = Object.assign(loginUser, data);
        loginUser.userPwd ='';//密码不直接保存到本地挺久化数据中
        //另外一种展开语法  loginUser = { ...loginUser, ...data };这种方法要求被复制的对象也有跟新的对象有相同的方法方可 
