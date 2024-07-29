@@ -3,13 +3,14 @@ import { defineAsyncComponent } from 'vue';
 
 
 //@ts-ignore  这个语句没用，只是开发时用来测试备注的
-const LoginView = defineAsyncComponent(() => import('@/views/Login/LoginView.vue'));
+const FlowForm = defineAsyncComponent(() => import('@/views/FlowForm/FlowForm.vue'));
 
 
 </script>
 
 <template>
   <div>
+    <!-- <FlowForm /> -->
     <router-view></router-view>
   </div>
 </template>
