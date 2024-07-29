@@ -29,8 +29,9 @@ import { reactive } from "vue";
 import { login } from "@/api/user";
 import { useLoginStore } from "@/stores";
 import { User } from "@/types/types";
+import axios from 'axios';
+import { useRouter, useRoute } from 'vue-router';
 import { showLoadingToast, showSuccessToast, showNotify, showToast, FieldRule } from 'vant';
-
 
 
 //获取pinia的Store
@@ -40,6 +41,8 @@ const LoginStore = useLoginStore();
 let user: User = reactive(new User());
 //let user: User = reactive(LoginStore.loginUser);
 
+const router = useRouter();
+const route = useRoute();
 
 //如下代码用于验证码框失去焦点自动处理非数字的字符
 // const onBlur = () => {
@@ -62,16 +65,22 @@ const onSubmit = async () => {
       //将登录成功后的用户信息保存到pinia中
       LoginStore.setUserData(res.data);
       //将登录界面中的输入框清空
-      //user = Object.assign(user, new User());
+      user = Object.assign(user, new User());
+      console.log(route);
+      router.push({ name: 'FlowForm', replace: true });
     } else {
-      //LoginStore.setUserData(res.data);
+      LoginStore.setUserData(res.data);
       showToast({
         message: '用户名或密码错误',
         icon: 'warn-o',
       });
     }
   }).catch((error) => {
-    console.log(error);
+    if (axios.isCancel(error)) {
+      console.log('Request canceled', error.message);
+    } else {
+      // 处理其他错误
+    }
   });
 
 

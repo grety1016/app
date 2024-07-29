@@ -1,5 +1,5 @@
 <template>
-
+    <div>单据页面</div>
 </template>
 
 <script setup lang="ts">
