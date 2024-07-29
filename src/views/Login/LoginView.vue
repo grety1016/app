@@ -5,9 +5,9 @@
     <van-form @submit="onSubmit">
       <div class=" login_content">
         <van-field v-model="user.userName" left-icon="user" name="userName" label="用户名" placeholder="请输入用户名"
-          :rules="userFormRules.userName" />
+          :rules="userFormRules.user" />
         <van-field v-model="user.userPwd" left-icon="lock" type="password" name="userPwd" label="密 码"
-          placeholder="请输入密码" :rules="userFormRules.userPwd" />
+          placeholder="请输入密码" :rules="userFormRules.user" />
 
 
       </div>
@@ -51,6 +51,16 @@ const route = useRoute();
 
 //登录表单提交事件函数
 const onSubmit = async () => {
+  //获取IP地址
+  // axios.get('https://api.ipify.org?format=json')
+  //   .then(response => {
+  //     console.log('Public IP Address:', response.data.ip);
+  //   })
+  //   .catch(error => {
+  //     console.error('Error getting IP address:', error);
+  //   });
+
+
   //如果网络慢会在登录时出现登录中的提示图标
   showLoadingToast({
     message: '登录中...',
@@ -65,9 +75,11 @@ const onSubmit = async () => {
       //将登录成功后的用户信息保存到pinia中
       LoginStore.setUserData(res.data);
       //将登录界面中的输入框清空
-      user = Object.assign(user, new User());
-      console.log(route);
-      router.push({ name: 'FlowForm', replace: true });
+      //user = Object.assign(user, new User());
+      router.push({
+        name: 'FlowForm',
+        //replace: true
+      });
     } else {
       LoginStore.setUserData(res.data);
       showToast({
@@ -79,6 +91,7 @@ const onSubmit = async () => {
     if (axios.isCancel(error)) {
       console.log('Request canceled', error.message);
     } else {
+      console.log('Other error', error.message);
       // 处理其他错误
     }
   });
@@ -98,17 +111,29 @@ const onRegedit = () => {
 
 //定义登录表单验证规则
 const userFormRules = {
-  userName: [
-    { required: true, message: '请输入用户名', trigger: 'onBlur' },
-    { pattern: /^[\u4e00-\u9fa5]{2,6}$/, message: '用户名格式不正确', trigger: 'onBlur' }
+  user: [
+    {
+      validator: (rule, value) => {
+        if (user.userName === "") {
+          showToast('请输入用户名');
+          return false;
+        } else if (!/^[\u4e00-\u9fa5]{2,6}$/.test(user.userName)) {
+          showToast('用户名格式不正确');
+          return false;
+        } else if (user.userPwd === "") {
+          showToast('请输入密码');
+          return false;
+        } else if (!/^[a-zA-Z0-9_~!@#$%^&*.-]{6,16}$/.test(user.userPwd)) {
+          showToast('密码格式不正确');
+          return false;
+        }
+        return true;
+      },
+      trigger: 'onBlur'
+    }
     //如果要绑定钉钉用户手机登录，验证有效的中国大陆手机：/^1[3456789]\d{9}$/
-  ] as FieldRule[],
-  userPwd: [
-    { required: true, message: '请输入密码', trigger: 'onBlur' },
-    { pattern: /^[a-zA-Z0-9_~!@#$%^&*.-]{6,16}$/, message: '密码格式不正确', trigger: 'onBlur' }
-  ] as FieldRule[],
+  ] as FieldRule[]
 };
-
 
 
 </script>
