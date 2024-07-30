@@ -1,4 +1,12 @@
+import { onLogin } from '@/api/user';
 import {createRouter,createWebHistory} from 'vue-router'
+import {request} from '@/utils/request';
+import { useLoginStore } from '@/stores';
+import axios from 'axios' 
+import { User } from '@/types/types';
+
+ 
+
 const LoginView = () => import('@/views/Login/LoginView.vue')
 const FlowForm = () => import('@/views/FlowForm/FlowForm.vue')
 
@@ -20,4 +28,28 @@ export const router = createRouter({
   routes,
   sensitive: false,
   strict: false
+});
+
+router.beforeEach((to, from, next) => { 
+  const loginStore = useLoginStore();
+  console.log('out');      
+  if (to.path !== '/login') {
+    if (loginStore.loginUser.token.length < 8) {
+      console.log(1);      
+      next('/login');
+    } else {
+      console.log(2); 
+      next();
+    }
+  }else {
+    if (loginStore.loginUser.token.length < 8){
+      console.log(3);
+      next();
+    }else{
+      next({name:'FlowForm'});
+    }
+    
+  }
+  
+  
 });

@@ -2,7 +2,7 @@
 import {request,source,CancelToken} from '@/utils/request';
 import { User } from '../types/types';
 import { AxiosResponse } from 'axios';
-export const login = (data:User):Promise<AxiosResponse<User>>  =>{
+export const onLogin = (data:User):Promise<AxiosResponse<User>>  =>{
     return request({
         url: '/user/login',
         method: 'post',

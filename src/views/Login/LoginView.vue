@@ -26,7 +26,7 @@
 import { reactive } from "vue";
 // import { FieldRule, FieldValidateTrigger, FieldRuleValidator } from 'vant'
 //引入login从API
-import { login } from "@/api/user";
+import { onLogin } from "@/api/user";
 import { useLoginStore } from "@/stores";
 import { User } from "@/types/types";
 import axios from 'axios';
@@ -68,7 +68,7 @@ const onSubmit = async () => {
     loadingType: 'spinner',
   });
   //调用API接口登录方法
-  login(user).then((res) => {
+  onLogin(user).then((res) => {
     //判断返回响应代码是否为0，,0为成功，其它为失败
     if (res.data.code === 0) {
       showSuccessToast('登录成功');
