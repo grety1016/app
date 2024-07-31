@@ -4,6 +4,7 @@ import {request} from '@/utils/request';
 import { useLoginStore } from '@/stores';
 import axios from 'axios' 
 import { User } from '@/types/types';
+import { equal } from 'assert';
 
  
 
@@ -31,11 +32,12 @@ export const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => { 
-  const loginStore = useLoginStore();
-  console.log('out');      
+  const loginStore = useLoginStore(); 
+ 
+  console.log(to.path);
   if (to.path !== '/login') {
     if (loginStore.loginUser.token.length < 8) {
-      console.log(1);      
+      console.log(3);      
       next('/login');
     } else {
       console.log(2); 
@@ -43,13 +45,14 @@ router.beforeEach((to, from, next) => {
     }
   }else {
     if (loginStore.loginUser.token.length < 8){
-      console.log(3);
+      console.log(1);
       next();
     }else{
+      const result = onLogin(new User());
+      console.log(result);
       next({name:'FlowForm'});
     }
     
-  }
-  
-  
+  }  
 });
+ 

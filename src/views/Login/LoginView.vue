@@ -16,7 +16,7 @@
         登 录</van-button>
       <van-button plain hairline type="primary" class="login_button" @click="onRegedit">
         注 册</van-button>
-    </van-form>
+    </van-form> 
   </div>
 
 </template>
@@ -30,7 +30,7 @@ import { onLogin } from "@/api/user";
 import { useLoginStore } from "@/stores";
 import { User } from "@/types/types";
 import axios from 'axios';
-import { useRouter, useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { showLoadingToast, showSuccessToast, showNotify, showToast, FieldRule } from 'vant';
 
 
@@ -38,11 +38,10 @@ import { showLoadingToast, showSuccessToast, showNotify, showToast, FieldRule } 
 const LoginStore = useLoginStore();
 
 //实例化user类型实例
-let user: User = reactive(new User());
+let user: User = reactive<User>(new User());
 //let user: User = reactive(LoginStore.loginUser);
 
 const router = useRouter();
-const route = useRoute();
 
 //如下代码用于验证码框失去焦点自动处理非数字的字符
 // const onBlur = () => {
@@ -113,7 +112,7 @@ const onRegedit = () => {
 const userFormRules = {
   user: [
     {
-      validator: (rule, value) => {
+      validator: () => {
         if (user.userName === "") {
           showToast('请输入用户名');
           return false;

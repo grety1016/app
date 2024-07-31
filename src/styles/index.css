@@ -1,33 +1,38 @@
 .login-nav-bar {
-    background-color: #2596fa;
+  background-color: #2596fa;
 }
-.login-nav-bar .van-nav-bar__title{
-  color:white;
+
+.login-nav-bar .van-nav-bar__title {
+  color: white;
   font-style: normal;
 }
-.login_background-image{
+
+.login_background-image {
   background-image: url('../assets/background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
 }
-.login_btn_div{ 
-    display: flex;
-    justify-content: center; /* 按钮居中对齐 */
-    margin-top: 30px; /* 与上方元素有一定边距 */
-  }
-  
-  .login_button {
-    height: 60px; /* 按钮高度低一点 */
-    margin: 0 125px; /* 两个按钮中间有间隔 */
-    margin-top: 30px;
-  }
 
-  .login_img {
-   width: 339px; /* 图片宽度 */
-   height: 94px;
-   margin-left:25%;
-  }
- 
- 
- 
+.login_btn_div {
+  display: flex;
+  justify-content: center;
+  /* 按钮居中对齐 */
+  margin-top: 30px;
+  /* 与上方元素有一定边距 */
+}
+
+.login_button {
+  height: 60px;
+  /* 按钮高度低一点 */
+  margin: 0 125px;
+  /* 两个按钮中间有间隔 */
+  margin-top: 30px;
+}
+
+.login_img {
+  width: 339px;
+  /* 图片宽度 */
+  height: 94px;
+  margin-left: 25%;
+}
