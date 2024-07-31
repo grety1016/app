@@ -34,7 +34,7 @@ export const router = createRouter({
 router.beforeEach((to, from, next) => { 
   const loginStore = useLoginStore(); 
  
-  console.log(to.path);
+  // console.log(to.path);
   if (to.path !== '/login') {
     if (loginStore.loginUser.token.length < 8) {
       console.log(3);      
